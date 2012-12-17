@@ -1,36 +1,23 @@
 <?php
 
-class SearchController extends Controller
-{
-	public function actionIndex()
-	{
+class SearchController extends Controller {
+
+  public $pageDescription;
+  public $pageKeywords;
+
+  public function afterRender() {
+    $this->pageDescription = $this->pageDescription ? $this->pageDescription : Yii::app()->params['pageDescription'];
+    $this->pageKeywords = $this->pageKeywords ? $this->pageKeywords : Yii::app()->params['pageKeywords'];
+
+    Yii::app()->clientScript->registerMetaTag($this->pageDescription, 'description');
+    Yii::app()->clientScript->registerMetaTag($this->pageKeywords, 'keywords');
+
+    return true;
+  }
+
+  public function actionIndex() {
+    Yii::app()->bootstrap->registerCoreCss();
 		$this->render('index');
 	}
 
-	// Uncomment the following methods and override them if needed
-	/*
-	public function filters()
-	{
-		// return the filter configuration for this controller, e.g.:
-		return array(
-			'inlineFilterName',
-			array(
-				'class'=>'path.to.FilterClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
-	}
-
-	public function actions()
-	{
-		// return external action classes, e.g.:
-		return array(
-			'action1'=>'path.to.ActionClass',
-			'action2'=>array(
-				'class'=>'path.to.AnotherActionClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
-	}
-	*/
 }

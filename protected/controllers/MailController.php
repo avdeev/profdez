@@ -5,7 +5,7 @@ class MailController extends Controller {
   public $pageDescription;
   public $pageKeywords;
 
-  public function beforeRender() {
+  public function afterRender() {
     $this->pageDescription = $this->pageDescription ? $this->pageDescription : Yii::app()->params['pageDescription'];
     $this->pageKeywords = $this->pageKeywords ? $this->pageKeywords : Yii::app()->params['pageKeywords'];
 
@@ -36,15 +36,20 @@ class MailController extends Controller {
     $message = new YiiMailMessage;
     $message->view = 'mailAsk';
 
-    //userModel is passed to the view
-    $message->setBody(array('form' => $_POST), 'text/html');
+    $model = new ContactForm();
+    $model->attributes = $_POST['contact'];
+    if ($model->validate()) {
+      $message->setBody(array('form' => $model), 'text/html');
 
-    $message->addTo(Yii::app()->params['adminEmail']);
-    $message->from = Yii::app()->params['adminEmail'];
-    Yii::app()->mail->send($message);
+      $message->addTo(Yii::app()->params['adminEmail']);
+      $message->from = Yii::app()->params['adminEmail'];
+      Yii::app()->mail->send($message);
 
-    echo 'OK';
-    
+      echo 'OK';
+    } else {
+      echo json_encode($model->getErrors());
+    }
+
     Yii::app()->end();
   }
 

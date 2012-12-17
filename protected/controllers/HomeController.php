@@ -5,7 +5,7 @@ class HomeController extends Controller {
   public $pageDescription;
   public $pageKeywords;
   
-  public function beforeRender() {
+  public function afterRender() {
     $this->pageDescription = $this->pageDescription ? $this->pageDescription : Yii::app()->params['pageDescription'];
     $this->pageKeywords = $this->pageKeywords ? $this->pageKeywords : Yii::app()->params['pageKeywords'];
 
