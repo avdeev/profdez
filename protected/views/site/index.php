@@ -24,6 +24,8 @@ $this->pageKeywords = 'дератизация, дезинсекция, дези�
               array('image' => '/images/carousel_1.jpg'),
               array('image' => '/images/carousel_2.jpg'),
               array('image' => '/images/carousel_3.jpg'),
+              array('image' => '/images/carousel_4.jpg'),
+              array('image' => '/images/carousel_5.jpg'),
           ),
       ));
       ?>
