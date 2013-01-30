@@ -1,7 +1,7 @@
 ﻿<?php
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-    'name' => 'ООО "Профдезинфекция"',
+    'name' => 'ООО "Профдезинфекция" - дератизация, дезинсекция, дезинфекция, уничтожение насекомых, уничтожение грызунов, Кстово',
     'preload' => array('log', 'less'),
     'import' => array(
         'application.models.*',
